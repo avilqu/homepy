@@ -17,6 +17,6 @@ sensor_remote = W1ThermSensor('3c01d075bfb0')
 while True:
     local_temp = local_sensor.get_temperature()
     remote_temp = remote_sensor.get_temperature()
-    print('Local (C): ' + str(local_temp)
-    print('Remote (C): ' + str(remote_temp)
+    print('Local (C): ' + str(local_temp))
+    print('Remote (C): ' + str(remote_temp))
     time.sleep(1)

@@ -11,8 +11,8 @@ from w1thermsensor import W1ThermSensor
 #     print("Sensor %s has temperature %.2f" %
 #           (sensor.id, sensor.get_temperature()))
 
-sensor_local = W1ThermSensor('3c01d0752026')
-sensor_remote = W1ThermSensor('3c01d075bfb0')
+local_sensor = W1ThermSensor('3c01d0752026')
+remote_sensor = W1ThermSensor('3c01d075bfb0')
 
 while True:
     local_temp = local_sensor.get_temperature()

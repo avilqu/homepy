@@ -7,11 +7,15 @@
 import time
 from w1thermsensor import W1ThermSensor
 
-for sensor in W1ThermSensor.get_available_sensors():
-    print("Sensor %s has temperature %.2f" % (sensor.id, sensor.get_temperature()))
+# for sensor in W1ThermSensor.get_available_sensors():
+#     print("Sensor %s has temperature %.2f" %
+#           (sensor.id, sensor.get_temperature()))
 
-sensor_local = W1ThermSensor(Sensor.DS18B20, "00000588806a")
-#while True:
-#    temp = sensor.get_temperature()
-#    print('Temperature (C): ' + str(temp))
-#    time.sleep(1)
+sensor_local = W1ThermSensor('3c01d0752026')
+sensor_remote = W1ThermSensor('3c01d075bfb0')
+
+while True:
+    temp = sensor.get_temperature()
+    print('Local (C): ' + str(local_sensor.get_temperature()mp))
+    print('Remote (C): ' + str(remote_sensor.get_temperature()mp))
+    time.sleep(1)

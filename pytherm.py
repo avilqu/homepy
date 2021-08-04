@@ -8,5 +8,5 @@ from w1thermsensor import W1ThermSensor
 sensor = W1ThermSensor()
 while True:
     temp = sensor.get_temperature()
-    print('Temperature (C): ' + temp)
+    print('Temperature (C): ' + str(temp))
     time.sleep(1)

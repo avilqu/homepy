@@ -10,7 +10,7 @@ from datetime import datetime
 import time
 
 base_dir = '/sys/bus/w1/devices/'
-data_dir = '/home/pi/pytherm'
+data_dir = '/home/pi/pytherm/'
 
 
 class DS18B20:

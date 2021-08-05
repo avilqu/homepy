@@ -6,7 +6,8 @@
 
 import glob
 import time
-import asyncio
+# import asyncio
+import threading
 from DS18B20 import DS18B20
 
 base_dir = '/sys/bus/w1/devices/'
@@ -17,9 +18,9 @@ for item in sensors_dirs:
     sensors.append(DS18B20(item))
 
 
-async def record_sensors(interval):
-    sensors[0].record_temp(data_dir, interval)
-    sensors[1].record_temp(data_dir, interval)
+# async def record_sensors(interval):
+#     sensors[0].record_temp(data_dir, interval)
+#     sensors[1].record_temp(data_dir, interval)
     # for sensor in sensors:
     # sensor.record_temp(data_dir, interval)
 
@@ -45,7 +46,11 @@ if __name__ == "__main__":
                 print(sensor.sensor_id, ':', sensor.read_temp())
             time.sleep(1)
     elif args.record:
-        asyncio.run(record_sensors(args.record))
+        for sensor in sensors:
+            record_thread = threading.Thread(
+                target=sensor.record_temp, name="Recorder", args=1)
+            record_thread.start()
+        # asyncio.run(record_sensors(args.record))
     else:
         for sensor in sensors:
             print(sensor.sensor_id, ':', sensor.read_temp())

@@ -40,23 +40,31 @@ class DS18B20:
         temp_c = self.read_temp()
         print(temp_c)
 
-    def print_loop(self, interval):
+    def print_loop(self):
         while True:
             temp_c = self.read_temp()
             print(temp_c)
-            time.sleep(interval)
+            time.sleep(1)
 
 
-if __name__ == "__main__":
+def list_sensors():
+    print(glob.glob(base_dir + '28*'))
 
-    import argparse
 
-    parser = argparse.ArgumentParser(
-        description='Reads output from a DS18B20 temperature sensor.')
-    parser.add_argument(
-        '-i', '--id', help='sensor ID', type=str, dest='sensor_id')
+list_sensors()
 
-    args = parser.parse_args()
+# if __name__ == "__main__":
 
-    if args.sensor_id:
-        DS18B20(args.sensor_id).print_loop(1)
+#     import argparse
+
+#     parser = argparse.ArgumentParser(
+#         description='Reads output from a DS18B20 temperature sensor.')
+#     parser.add_argument(
+#         '-i', '--id', help='sensor ID', type=str, dest='sensor_id')
+#     parser.add_argument(
+#         '-l', '--loop', help='print temp loop (1s interval)', action='store_true')
+
+#     args = parser.parse_args()
+
+#     if args.sensor_id:
+#         DS18B20(args.sensor_id).print_loop()

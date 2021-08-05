@@ -17,7 +17,7 @@ class DS18B20:
 
     def __init__(self, sensor_id):
         self.id = sensor_id
-        self.w1_slave = base_dir + '28-' + sensor_id
+        self.w1_slave = base_dir + '28-' + sensor_id + '/w1_slave'
 
     def read_raw(self):
         f = open(self.w1_slave, 'r')

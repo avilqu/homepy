@@ -59,4 +59,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.sensor_id:
-        DS18B20(args.id).print_loop(1)
+        DS18B20(args.sensor_id).print_loop(1)

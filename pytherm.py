@@ -6,7 +6,6 @@
 
 import glob
 import time
-from datetime import datetime
 from DS18B20 import DS18B20
 
 base_dir = '/sys/bus/w1/devices/'

@@ -41,3 +41,5 @@ class DS18B20:
             temp_c = round(self.read_temp(), 1)
             print(temp_c)
             time.sleep(1)
+
+    # def record_temp(self, record_dir, interval):

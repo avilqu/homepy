@@ -8,9 +8,6 @@ import os
 import time
 from datetime import datetime
 
-data_dir = '/mnt/pytherm-data/'
-interval = 1
-
 
 class DS18B20:
     ''' Contains output data from a DS18B20 temp sensor '''

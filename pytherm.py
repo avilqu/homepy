@@ -48,7 +48,7 @@ if __name__ == "__main__":
     elif args.record:
         for sensor in sensors:
             record_thread = threading.Thread(
-                target=sensor.record_temp, name="Recorder", args=[args.record])
+                target=sensor.record_temp, name="Recorder", args=(args.record))
             record_thread.start()
         # asyncio.run(record_sensors(args.record))
     else:

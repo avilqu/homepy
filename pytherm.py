@@ -6,7 +6,7 @@
 
 import os
 import glob
-import datetime
+from datetime import datetime
 import time
 
 from DS18B20 import DS18B20

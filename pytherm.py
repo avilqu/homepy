@@ -51,10 +51,10 @@ def record_sensors(interval):
         f = open(data_filename, 'w')
 
     while True:
+        data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
         for sensor in sensors:
-            data_string = sensor.sensor_id + ',' + datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + \
-                ',' + str(sensor.read_temp()) + '\n'
-            f.write(data_string)
+            data_string = data_string + str(sensor.read_temp()) + ','
+        f.write(data_string)
         time.sleep(interval)
 
 

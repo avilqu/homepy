@@ -18,8 +18,10 @@ for item in sensors_dirs:
 
 
 async def record_sensors(interval):
-    for sensor in sensors:
-        sensor.record_temp(data_dir, interval)
+    sensors[0].record_temp(data_dir, interval)
+    sensors[1].record_temp(data_dir, interval)
+    # for sensor in sensors:
+    # sensor.record_temp(data_dir, interval)
 
 if __name__ == "__main__":
 

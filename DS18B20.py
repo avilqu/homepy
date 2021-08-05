@@ -46,6 +46,9 @@ class DS18B20:
 
     def record_temp(self, data_dir, interval):
         record_dir = data_dir + self.sensor_id + '/'
+        if not os.path.exists(record_dir):
+            os.mkdir(record_dir)
+
         data_filename = record_dir + datetime.now().strftime('%Y-%m-%d') + '.txt'
 
         if os.path.exists(data_filename):

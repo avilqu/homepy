@@ -4,7 +4,9 @@
     @author: Adrien Vilquin Barrajon <avilqu@gmail.com>
 '''
 
+import os
 import time
+from datetime import datetime
 
 
 class DS18B20:
@@ -42,4 +44,17 @@ class DS18B20:
             print(temp_c)
             time.sleep(1)
 
-    # def record_temp(self, record_dir, interval):
+    def record_temp(self, data_dir, interval):
+        record_dir = data_dir + self.sensor_id + '/'
+        data_filename = record_dir + datetime.now().strftime('%Y-%m-%d')
+
+        if os.path.exists(data_filename):
+            f = open(data_filename, 'a')
+        else:
+            f = open(data_filename, 'w')
+
+        while True:
+            data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + \
+                ',' + round(self.read_temp(), 1) + '\n'
+            f.write(data_string)
+            time.sleep(interval)

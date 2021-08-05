@@ -25,7 +25,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.loop:
-        sensors[0].print_temp()
+        sensors[0].print_loop()
     else:
         for sensor in sensors:
             sensor.print_temp()

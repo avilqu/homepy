@@ -9,14 +9,34 @@ import glob
 from datetime import datetime
 import time
 
-from DS18B20 import DS18B20
-
 base_dir = '/sys/bus/w1/devices/'
 data_dir = '/mnt/pytherm-data/'
-sensors_dirs = glob.glob(base_dir + '28*')
-sensors = []
-for item in sensors_dirs:
-    sensors.append(DS18B20(item))
+
+
+class DS18B20:
+    ''' Contains output data from a DS18B20 temp sensor '''
+
+    def __init__(self, sensor_dir):
+        self.sensor_dir = sensor_dir
+        self.sensor_id = sensor_dir[23:]
+        self.w1_slave = sensor_dir + '/w1_slave'
+
+    def read_raw(self):
+        f = open(self.w1_slave, 'r')
+        lines = f.readlines()
+        f.close()
+        return lines
+
+    def read_temp(self):
+        data = self.read_raw()
+        while data[0].strip()[-3:] != 'YES':
+            data = self.read_raw()
+
+        temp_position = data[1].find('t=')
+        if temp_position != -1:
+            temp_string = data[1][temp_position+2:]
+            temp_c = float(temp_string) / 1000.0
+            return round(temp_c, 1)
 
 
 def record_sensors(interval):
@@ -37,6 +57,11 @@ def record_sensors(interval):
             f.write(data_string)
         time.sleep(interval)
 
+
+sensors_dirs = glob.glob(base_dir + '28*')
+sensors = []
+for item in sensors_dirs:
+    sensors.append(DS18B20(item))
 
 if __name__ == "__main__":
 

@@ -15,9 +15,9 @@ local_sensor = local_sensor_dir + '/w1_slave'
 class DS18B20:
     ''' Contains output data from a DS18B20 temp sensor '''
 
-    def __init__(self, sensor_id):
-        self.id = sensor_id
-        self.w1_slave = base_dir + '28-' + sensor_id + '/w1_slave'
+    def __init__(self, sensor_dir):
+        self.sensor_dir = sensor_dir
+        self.w1_slave = sensor_dir + '/w1_slave'
 
     def read_raw(self):
         f = open(self.w1_slave, 'r')
@@ -47,11 +47,12 @@ class DS18B20:
             time.sleep(1)
 
 
-def list_sensors():
-    print(glob.glob(base_dir + '28*'))
+sensors_dirs = glob.glob(base_dir + '28*')
+sensors = []
+for sensor_dir in sensors_dirs:
+    sensors.append(DS18B20(sensor_dir))
 
-
-list_sensors()
+print(sensors)
 
 # if __name__ == "__main__":
 

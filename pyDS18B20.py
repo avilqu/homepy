@@ -17,6 +17,8 @@ class DS18B20:
 
     def __init__(self, sensor_dir):
         self.sensor_dir = sensor_dir
+        self.sensor_id = sensor_dir[23:]
+        print(self.sensor_id)
         self.w1_slave = sensor_dir + '/w1_slave'
 
     def read_raw(self):
@@ -49,10 +51,8 @@ class DS18B20:
 
 sensors_dirs = glob.glob(base_dir + '28*')
 sensors = []
-for sensor_dir in sensors_dirs:
-    sensors.append(DS18B20(sensor_dir))
-
-print(sensors)
+for item in sensors_dirs:
+    sensors.append(DS18B20(item))
 
 # if __name__ == "__main__":
 

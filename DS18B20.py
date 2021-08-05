@@ -32,7 +32,7 @@ class DS18B20:
         if temp_position != -1:
             temp_string = data[1][temp_position+2:]
             temp_c = float(temp_string) / 1000.0
-            return temp_c
+            return round(temp_c, 1)
 
     def print_temp(self):
         temp_c = self.read_temp()
@@ -40,7 +40,7 @@ class DS18B20:
 
     def print_loop(self):
         while True:
-            temp_c = round(self.read_temp(), 1)
+            temp_c = self.read_temp()
             print(temp_c)
             time.sleep(1)
 
@@ -58,6 +58,6 @@ class DS18B20:
 
         while True:
             data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + \
-                ',' + str(round(self.read_temp(), 1)) + '\n'
+                ',' + str(self.read_temp()) + '\n'
             f.write(data_string)
             time.sleep(interval)

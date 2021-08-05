@@ -28,12 +28,10 @@ if __name__ == "__main__":
     if args.loop:
         while True:
             for sensor in sensors:
-                temp = sensor.print_temp()
-                print(sensor.sensor_id, ':', temp)
+                print(sensor.sensor_id, ':', sensor.read_temp())
                 # sensor.print_temp()
                 time.sleep(1)
     else:
         for sensor in sensors:
-            temp = sensor.print_temp()
-            print(sensor.sensor_id, ':', temp)
+            print(sensor.sensor_id, ':', sensor.read_temp())
             # sensor.print_temp()

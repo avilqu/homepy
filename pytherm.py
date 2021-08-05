@@ -16,24 +16,30 @@ sensors = []
 for item in sensors_dirs:
     sensors.append(DS18B20(item))
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-#     import argparse
+    import argparse
 
-#     parser = argparse.ArgumentParser(
-#         description='Reads output from DS18B20 temperature sensors.')
-#     parser.add_argument(
-#         '-l', '--loop', help='print temp loop (1s interval)', action='store_true')
+    parser = argparse.ArgumentParser(
+        description='Reads output from DS18B20 temperature sensors.')
+    parser.add_argument(
+        '-l', '--loop', help='print temp loop (1s interval)', action='store_true')
+    parser.add_argument(
+        '-r', '--record', help='record data to file with specified interval (in seconds)', type=int, dest='record')
 
-#     args = parser.parse_args()
+    args = parser.parse_args()
 
-#     if args.loop:
-#         while True:
-#             for sensor in sensors:
-#                 print(sensor.sensor_id, ':', sensor.read_temp())
-#             time.sleep(1)
-#     else:
-#         for sensor in sensors:
-#             print(sensor.sensor_id, ':', sensor.read_temp())
+    if args.loop and args.record:
+        print('Loop and record functions are exclusive to each other.')
 
-sensors[0].record_temp(data_dir, 1)
+    if args.loop:
+        while True:
+            for sensor in sensors:
+                print(sensor.sensor_id, ':', sensor.read_temp())
+            time.sleep(1)
+    elif args.record:
+        sensors[0].record_temp(data_dir, 30)
+
+    else:
+        for sensor in sensors:
+            print(sensor.sensor_id, ':', sensor.read_temp())

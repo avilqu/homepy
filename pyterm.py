@@ -5,6 +5,7 @@
 '''
 
 import glob
+import time
 from DS18B20 import DS18B20
 
 base_dir = '/sys/bus/w1/devices/'
@@ -25,7 +26,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.loop:
-        sensors[0].print_loop()
+        while True:
+            for sensor in sensors:
+                print(sensor.sensor_id, ':', sensor.print_temp())
+                # sensor.print_temp()
+                time.sleep(1)
     else:
         for sensor in sensors:
-            sensor.print_temp()
+            print(sensor.sensor_id, ':', sensor.print_temp())
+            # sensor.print_temp()

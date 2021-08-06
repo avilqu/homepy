@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-''' Starting script for all pyterm functionalities.
+''' Reads output from DS18B20 temperature sensors.
     @author: Adrien Vilquin Barrajon <avilqu@gmail.com>
 '''
 
@@ -9,8 +9,7 @@ import glob
 from datetime import datetime
 import time
 
-base_dir = '/sys/bus/w1/devices/'
-data_dir = '/home/pi/pytherm/'
+import config as cfg
 
 
 class DS18B20:
@@ -40,11 +39,11 @@ class DS18B20:
 
 
 def record_sensors(interval):
-    if not os.path.exists(data_dir):
-        os.mkdir(data_dir)
+    if not os.path.exists(cfg.DATA_DIR):
+        os.mkdir(cfg.DATA_DIR)
 
     start_date = datetime.now().strftime('%Y-%m-%d')
-    data_filename = data_dir + start_date + '.txt'
+    data_filename = cfg.DATA_DIR + start_date + '.txt'
 
     if os.path.exists(data_filename):
         f = open(data_filename, 'a')
@@ -62,7 +61,7 @@ def record_sensors(interval):
     f.close()
 
 
-sensors_dirs = glob.glob(base_dir + '28*')
+sensors_dirs = glob.glob(cfg.BASE_DIR + '28*')
 sensors = []
 for item in sensors_dirs:
     sensors.append(DS18B20(item))

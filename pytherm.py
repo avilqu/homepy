@@ -43,20 +43,23 @@ def record_sensors(interval):
     if not os.path.exists(data_dir):
         os.mkdir(data_dir)
 
-    data_filename = data_dir + datetime.now().strftime('%Y-%m-%d') + '.txt'
+    start_date = datetime.now().strftime('%Y-%m-%d')
+    data_filename = data_dir + start_date + '.txt'
 
     if os.path.exists(data_filename):
         f = open(data_filename, 'a')
     else:
         f = open(data_filename, 'w')
 
-    while True:
+    while start_date == datetime.now().strftime('%Y-%m-%d'):
         data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
         for sensor in sensors:
             data_string = data_string + str(sensor.read_temp()) + ','
         data_string = data_string + '\n'
         f.write(data_string)
         time.sleep(interval)
+
+    f.close()
 
 
 sensors_dirs = glob.glob(base_dir + '28*')

@@ -8,6 +8,7 @@ import os
 import glob
 from datetime import datetime
 import time
+import msvcrt
 
 import config as cfg
 
@@ -51,6 +52,8 @@ def record_sensors(interval):
         f = open(data_filename, 'w')
 
     while start_date == datetime.now().strftime('%Y-%m-%d'):
+        if msvcrt.kbhit():
+            break
         data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
         for sensor in sensors:
             data_string = data_string + str(sensor.read_temp()) + ','
@@ -81,13 +84,18 @@ if __name__ == "__main__":
 
     if args.loop and args.record:
         print('Loop and record functions are exclusive to each other.')
+
     elif args.loop:
         while True:
+            if msvcrt.kbhit():
+                break
             for sensor in sensors:
                 print(sensor.sensor_id, ':', sensor.read_temp())
             time.sleep(1)
+
     elif args.record:
         record_sensors(args.record)
+
     else:
         for sensor in sensors:
             print(sensor.sensor_id, ':', sensor.read_temp())

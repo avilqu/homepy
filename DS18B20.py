@@ -52,10 +52,13 @@ def record_sensors(interval):
 
     while True:
         if start_date != datetime.now().strftime('%Y-%m-%d'):
+            print('End of day...')
             break
         data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
         for sensor in sensors:
             data_string = data_string + str(sensor.read_temp()) + ','
+            print(datetime.now().strftime('%Y-%m-%d'),
+                  sensor.sensor_id, ':', sensor.read_temp())
         data_string = data_string + '\n'
         f.write(data_string)
         time.sleep(interval)

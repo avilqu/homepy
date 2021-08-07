@@ -48,15 +48,15 @@ def record_sensors(interval):
 
         print('Writing data to', data_filename)
 
-        if os.path.exists(data_filename):
-            f = open(data_filename, 'a')
-        else:
-            f = open(data_filename, 'w')
-
         while True:
             if start_date != datetime.now().strftime('%Y-%m-%d'):
                 print('End of day...')
                 break
+            elif os.path.exists(data_filename):
+                f = open(data_filename, 'a')
+            else:
+                f = open(data_filename, 'w')
+
             data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
             for sensor in sensors:
                 data_string = data_string + str(sensor.read_temp()) + ','
@@ -64,8 +64,7 @@ def record_sensors(interval):
             data_string = data_string + '\n'
             f.write(data_string)
             time.sleep(interval)
-
-        f.close()
+            f.close()
 
 
 sensors_dirs = glob.glob(cfg.BASE_DIR + '28*')

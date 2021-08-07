@@ -51,7 +51,7 @@ def record_sensors(interval):
         f = open(data_filename, 'w')
 
     while True:
-        if start_date == datetime.now().strftime('%Y-%m-%d'):
+        if start_date != datetime.now().strftime('%Y-%m-%d'):
             break
         data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
         for sensor in sensors:

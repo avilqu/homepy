@@ -8,7 +8,6 @@ import os
 import glob
 from datetime import datetime
 import time
-import msvcrt
 
 import config as cfg
 
@@ -51,8 +50,8 @@ def record_sensors(interval):
     else:
         f = open(data_filename, 'w')
 
-    while start_date == datetime.now().strftime('%Y-%m-%d'):
-        if msvcrt.kbhit():
+    while True:
+        if start_date == datetime.now().strftime('%Y-%m-%d'):
             break
         data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
         for sensor in sensors:
@@ -87,8 +86,6 @@ if __name__ == "__main__":
 
     elif args.loop:
         while True:
-            if msvcrt.kbhit():
-                break
             for sensor in sensors:
                 print(sensor.sensor_id, ':', sensor.read_temp())
             time.sleep(1)

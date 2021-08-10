@@ -46,7 +46,7 @@ def record_sensors(interval):
         start_date = datetime.now().strftime('%Y-%m-%d')
         data_filename = cfg.DATA_DIR + start_date + '.txt'
 
-        print('Writing data to', data_filename)
+        print(f'Writing data to {data_filename}')
 
         while True:
             if start_date != datetime.now().strftime('%Y-%m-%d'):

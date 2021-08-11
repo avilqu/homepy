@@ -3,4 +3,4 @@
 '''
 
 BASE_DIR = '/sys/bus/w1/devices/'   # System one-wire directory
-DATA_DIR = '/mnt/pytherm/'          # Data storage folder
+DATA_DIR = '/home/pi/'          # Data storage folder

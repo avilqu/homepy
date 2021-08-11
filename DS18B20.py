@@ -63,8 +63,8 @@ def record_sensors(interval):
             print(data_string)
             data_string = data_string + '\n'
             f.write(data_string)
-            time.sleep(interval)
             f.close()
+            time.sleep(interval)
 
 
 sensors_dirs = glob.glob(cfg.BASE_DIR + '28*')

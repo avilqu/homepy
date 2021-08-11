@@ -38,7 +38,7 @@ class DS18B20:
             return round(temp_c, 1)
 
 
-def record_sensors(interval):
+def record_sensors():
     while True:
         if not os.path.exists(cfg.DATA_DIR):
             os.mkdir(cfg.DATA_DIR)
@@ -64,7 +64,7 @@ def record_sensors(interval):
             data_string = data_string + '\n'
             f.write(data_string)
             f.close()
-            time.sleep(interval)
+            time.sleep(cfg.RECORD_INTERVAL)
 
 
 sensors_dirs = glob.glob(cfg.BASE_DIR + '28*')
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '-l', '--loop', help='print temp loop (1s interval)', action='store_true')
     parser.add_argument(
-        '-r', '--record', help='record data to file with specified interval (in seconds)', type=int, dest='record')
+        '-r', '--record', help='record data to file', action='store_true')
 
     args = parser.parse_args()
 
@@ -95,7 +95,7 @@ if __name__ == "__main__":
             time.sleep(1)
 
     elif args.record:
-        record_sensors(args.record)
+        record_sensors()
 
     else:
         for sensor in sensors:

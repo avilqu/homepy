@@ -9,8 +9,7 @@ app = Flask(__name__, template_folder="templates")
 
 @app.route('/')
 def home():
-    print(sensors.read_last())
-    print(type(sensors.read_last()))
+    data = sensors.read_last()
     return render_template('home.html')
 
 

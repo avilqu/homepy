@@ -37,7 +37,7 @@ if db is not None:
         print(e)
 
 
-def db_record_temp(data):
+def db_write_temp(data):
     sql = ''' 
         INSERT INTO temp(timestamp,sensor1,sensor2)
         VALUES(?,?,?) '''
@@ -49,10 +49,24 @@ def db_record_temp(data):
 
 def record_sensors():
     while True:
-        db_record_temp((datetime.now().strftime('%Y-%m-%dT%H:%M:%S'),
-                        sensors[0].read_temp(),
-                        sensors[1].read_temp()))
+        db_write_temp((datetime.now().strftime('%Y-%m-%dT%H:%M:%S'),
+                       sensors[0].read_temp(),
+                       sensors[1].read_temp()))
         time.sleep(cfg.RECORD_INTERVAL)
+
+
+def read_last():
+    sql = 'SELECT * FROM temp LIMIT 1'
+    cur = db.cursor()
+    cur.execute(sql)
+    return cur.fetchall()[0]
+
+
+def read_last_24h():
+    sql = 'SELECT * FROM temp LIMIT 1440'
+    cur = db.cursor()
+    cur.execute(sql)
+    return cur.fetchall()
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ import sqlite3
 from sqlite3 import Error
 
 import config as cfg
-import DS18B20
+from DS18B20 import *
 
 db = None
 try:

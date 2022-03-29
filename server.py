@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder="templates")
 @app.route('/')
 def home():
     data = sensors.read_last()
-    return render_template('home.html', data)
+    return render_template('home.html')
 
 
 if __name__ == '__main__':

@@ -55,35 +55,6 @@ def record_sensors():
         time.sleep(cfg.RECORD_INTERVAL)
 
 
-def record_sensors_to_file():
-    while True:
-        if not os.path.exists(cfg.DATA_DIR):
-            os.mkdir(cfg.DATA_DIR)
-
-        start_date = datetime.now().strftime('%Y-%m-%d')
-        data_filename = cfg.DATA_DIR + start_date + '.txt'
-
-        print(f'Writing data to {data_filename}')
-
-        while True:
-            if start_date != datetime.now().strftime('%Y-%m-%d'):
-                print('End of day...')
-                break
-            elif os.path.exists(data_filename):
-                f = open(data_filename, 'a')
-            else:
-                f = open(data_filename, 'w')
-
-            data_string = datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ','
-            for sensor in sensors:
-                data_string = data_string + str(sensor.read_temp()) + ','
-            print(data_string)
-            data_string = data_string + '\n'
-            f.write(data_string)
-            f.close()
-            time.sleep(cfg.RECORD_INTERVAL)
-
-
 if __name__ == "__main__":
 
     import argparse
@@ -94,8 +65,6 @@ if __name__ == "__main__":
         '-l', '--loop', help='print temp loop (1s interval)', action='store_true')
     parser.add_argument(
         '-r', '--record', help='record data to database', action='store_true')
-    parser.add_argument(
-        '-f', '--file', help='record data to file', action='store_true')
 
     args = parser.parse_args()
 
@@ -107,9 +76,6 @@ if __name__ == "__main__":
             for sensor in sensors:
                 print(sensor.sensor_id, ':', sensor.read_temp())
             time.sleep(1)
-
-    elif args.file:
-        record_sensors_to_file()
 
     elif args.record:
         record_sensors()

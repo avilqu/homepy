@@ -51,16 +51,16 @@ def record_sensors():
         time.sleep(cfg.RECORD_INTERVAL)
 
 
-def read_last(db):
+def read_last():
     sql = 'SELECT * FROM temp LIMIT 1'
-    cur = db.cursor()
+    cur = db_connect().cursor()
     cur.execute(sql)
     return cur.fetchall()[0]
 
 
-def read_last_24h(db):
+def read_last_24h():
     sql = 'SELECT * FROM temp LIMIT 1440'
-    cur = db.cursor()
+    cur = db_connect.cursor()
     cur.execute(sql)
     return cur.fetchall()
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         record_sensors()
 
     elif args.show:
-        print(read_last_24h(db_connect()))
+        print(read_last_24h())
 
     else:
         for sensor in sensors:

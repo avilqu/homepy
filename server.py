@@ -1,7 +1,6 @@
-from flask import (
-    Flask,
-    render_template
-)
+#!/usr/bin/python3
+
+from flask import Flask, render_template
 
 import sensors
 

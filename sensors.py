@@ -96,6 +96,9 @@ if __name__ == "__main__":
     elif args.record:
         record_sensors()
 
+    elif args.show:
+        read_last_24h()()
+
     else:
         for sensor in sensors:
             print(sensor.sensor_id, ':', sensor.read_temp())

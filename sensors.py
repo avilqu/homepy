@@ -79,6 +79,8 @@ if __name__ == "__main__":
         '-l', '--loop', help='print temp loop (1s interval)', action='store_true')
     parser.add_argument(
         '-r', '--record', help='record data to database', action='store_true')
+    parser.add_argument(
+        '-s', '--show', help='show records for the last 24h', action='store_true')
 
     args = parser.parse_args()
 

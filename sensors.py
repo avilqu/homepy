@@ -60,7 +60,7 @@ def read_last():
 
 def read_last_24h():
     sql = 'SELECT * FROM temp LIMIT 1440'
-    cur = db_connect.cursor()
+    cur = db_connect().cursor()
     cur.execute(sql)
     return cur.fetchall()
 

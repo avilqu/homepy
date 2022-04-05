@@ -58,13 +58,6 @@ def read_last():
     return cur.fetchall()[0]
 
 
-# def read_last_24h():
-#     sql = 'SELECT * FROM temp ORDER BY ID DESC LIMIT 1440'
-#     cur = db_connect().cursor()
-#     cur.execute(sql)
-#     return cur.fetchall()
-
-
 def read_last_xh(x):
     sql = f'SELECT * FROM temp ORDER BY ID DESC LIMIT {x * 60}'
     cur = db_connect().cursor()
@@ -83,12 +76,13 @@ if __name__ == "__main__":
     parser.add_argument(
         '-r', '--record', help='record data to database', action='store_true')
     parser.add_argument(
-        '-s', '--show', help='show records for the last 24h', action='store_true')
+        '-s', '--show', type=int, help='show records for the last x hours', default=1)
 
     args = parser.parse_args()
 
     if args.loop and args.record:
         print('Loop and record functions are exclusive to each other.')
+        exit()
 
     elif args.loop:
         while True:

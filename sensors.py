@@ -59,7 +59,6 @@ def read_last():
 
 
 def read_last_xh(x):
-    print(x)
     sql = "SELECT * FROM temp ORDER BY ID DESC LIMIT :limit"
     cur = db_connect().cursor()
     cur.execute(sql, {"limit": x})
@@ -77,7 +76,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '-r', '--record', help='record data to database', action='store_true')
     parser.add_argument(
-        '-s', '--show', type=int, help='show records for the last x hours', default=1)
+        '-s', '--show', nargs='?', const=1, type=int, help='show records for the last x hours')
 
     args = parser.parse_args()
 

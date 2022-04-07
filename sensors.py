@@ -60,9 +60,9 @@ def read_last():
 
 def read_last_xh(x):
     print(x)
-    sql = 'SELECT * FROM temp ORDER BY ID DESC LIMIT (%s)'
+    sql = "SELECT * FROM temp ORDER BY ID DESC LIMIT :limit"
     cur = db_connect().cursor()
-    cur.execute(sql, (x))
+    cur.execute(sql, {"limit": x})
     return cur.fetchall()
 
 

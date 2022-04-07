@@ -95,7 +95,7 @@ if __name__ == "__main__":
         record_sensors()
 
     elif args.show:
-        print(read_last_xh(24))
+        print(read_last_xh(args.show))
 
     else:
         for sensor in sensors:

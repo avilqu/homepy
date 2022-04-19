@@ -34,8 +34,8 @@ def db_connect():
 
 
 def db_write_temp(db, data):
-    sql = ''' 
-        INSERT INTO temp(timestamp,sensor1,sensor2)
+    sql = f''' 
+        INSERT INTO {cfg.DB_TBNAME}(timestamp,sensor1,sensor2)
         VALUES(?,?,?) '''
     cur = db.cursor()
     cur.execute(sql, data)
@@ -52,20 +52,20 @@ def record_sensors():
 
 
 def read_last():
-    sql = 'SELECT * FROM temp ORDER BY ID DESC LIMIT 1'
+    sql = f'SELECT * FROM {cfg.DB_TBNAME} ORDER BY ID DESC LIMIT 1'
     cur = db_connect().cursor()
     cur.execute(sql)
     return cur.fetchall()[0]
 
 
 def read_last_xh(x):
-    sql = "SELECT * FROM temp ORDER BY ID DESC LIMIT :limit"
+    sql = f'SELECT * FROM {cfg.DB_TBNAME} ORDER BY ID DESC LIMIT :limit'
     cur = db_connect().cursor()
-    cur.execute(sql, {"limit": x})
+    cur.execute(sql, {'limit': x})
     return cur.fetchall()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     import argparse
 

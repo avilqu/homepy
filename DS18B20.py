@@ -4,13 +4,6 @@
     @author: Adrien Vilquin Barrajon <avilqu@gmail.com>
 '''
 
-# import os
-# import glob
-# from datetime import datetime
-# import time
-
-# import config as cfg
-
 
 class DS18B20:
 

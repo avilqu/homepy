@@ -5,8 +5,9 @@
 BASE_DIR = '/sys/bus/w1/devices/'         # System one-wire directory
 RECORD_INTERVAL = 60                      # Record interval (seconds)
 DB_FILE = '/home/pi/tempy/tempy.db'
-SQL_INIT = '''
-    CREATE TABLE IF NOT EXISTS temp (
+DB_TBNAME = 'temp'
+SQL_INIT = f'''
+    CREATE TABLE IF NOT EXISTS {DB_TBNAME} (
         id integer PRIMARY KEY,
         timestamp text,
         sensor1 real,

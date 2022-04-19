@@ -4,7 +4,7 @@
 
 BASE_DIR = '/sys/bus/w1/devices/'         # System one-wire directory
 RECORD_INTERVAL = 60                      # Record interval (seconds)
-DB_FILE = '/home/pi/homepy/homepy.db'
+DB_FILE = '/home/pi/tempy/tempy.db'
 SQL_INIT = '''
     CREATE TABLE IF NOT EXISTS temp (
         id integer PRIMARY KEY,

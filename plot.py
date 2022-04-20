@@ -25,6 +25,6 @@ ax.plot(x, y2)
 ax.set_ylim([8, 35])
 ax.set_xlim([dt.datetime.now() - dt.timedelta(days=1), dt.datetime.now()])
 
-plot_file = open('/var/www/html/index.html', 'w')
+plot_file = open('index.html', 'w')
 plot_file.write(mpld3.fig_to_html(fig))
 plot_file.close()

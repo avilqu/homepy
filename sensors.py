@@ -58,7 +58,7 @@ def read_last():
     return cur.fetchall()[0]
 
 
-def read_last_xh(x):
+def read_last_x(x):
     sql = f'SELECT * FROM {cfg.DB_TBNAME} ORDER BY ID DESC LIMIT :limit'
     cur = db_connect().cursor()
     cur.execute(sql, {'limit': x})
@@ -94,7 +94,7 @@ if __name__ == '__main__':
         record_sensors()
 
     elif args.show:
-        temp_data = read_last_xh(args.show)
+        temp_data = read_last_x(args.show)
         for data_point in temp_data:
             print(data_point)
 

@@ -13,6 +13,10 @@ x = []
 y1 = []
 y2 = []
 
+last_time = data[0][1]
+last_1 = data[0][2]
+last_2 = data[0][3]
+
 for data_point in data:
     x.append(dt.datetime.strptime(data_point[1], '%Y-%m-%dT%H:%M:%S'))
     y1.append(data_point[2])
@@ -20,10 +24,13 @@ for data_point in data:
 
 fig = plt.figure()
 ax = plt.axes()
+plt.title(f'{last_time}: {last_1} - {last_2}')
 ax.plot(x, y1)
 ax.plot(x, y2)
 ax.set_ylim([8, 35])
 ax.set_xlim([dt.datetime.now() - dt.timedelta(days=1), dt.datetime.now()])
+
+# mpld3.show()
 
 plot_file = open('/home/pi/tempy/index.html', 'w')
 plot_file.write(mpld3.fig_to_html(fig))

@@ -6,7 +6,7 @@ import mpld3
 
 import sensors
 
-sample_length = 1440
+sample_length = 14400
 data = sensors.read_last_x(sample_length)
 
 x = []
@@ -28,7 +28,8 @@ plt.title(f'{last_time}: {last_1} - {last_2}')
 ax.plot(x, y1)
 ax.plot(x, y2)
 ax.set_ylim([8, 35])
-ax.set_xlim([dt.datetime.now() - dt.timedelta(hours=6), dt.datetime.now()])
+ax.set_xlim([dt.datetime.now() - dt.timedelta(hours=12), dt.datetime.now()])
+# ax.set_xlim([dt.datetime.now() - dt.timedelta(hours=6), dt.datetime.now()])
 
 # mpld3.show()
 

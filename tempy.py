@@ -31,12 +31,12 @@ def start_recording():
         data_points = [{
             'measurement': 'indoorTemp',
             'fields': {
-                'temperature': sensors[0].read_temp()
+                'temperature': round(sensors[0].read_temp(), 2)
             }
         }, {
             'measurement': 'outdoorTemp',
             'fields': {
-                'temperature': sensors[1].read_temp()
+                'temperature': round(sensors[1].read_temp(), 2)
             }
         }]
         db.write_data_points(data_points)

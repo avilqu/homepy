@@ -27,4 +27,4 @@ class DS18B20:
         if temp_position != -1:
             temp_string = data[1][temp_position+2:]
             temp_c = float(temp_string) / 1000.0
-            return round(temp_c, 1)
+            return temp_c

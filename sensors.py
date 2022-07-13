@@ -28,7 +28,7 @@ else:
 def start_recording():
     db = DB()
     while True:
-        db.write_data_points([{
+        data_points = [{
             'measurement': 'indoorTemp',
             'fields': {
                 'temperature': sensors[0].read_temp()
@@ -38,7 +38,10 @@ def start_recording():
             'fields': {
                 'temperature': sensors[1].read_temp()
             }
-        }])
+        }]
+        db.write_data_points(data_points)
+
+        print(data_points)
 
         time.sleep(cfg.RECORD_INTERVAL)
 

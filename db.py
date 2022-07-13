@@ -17,5 +17,3 @@ class DB:
 
     def write_data_points(self, data_points):
         self.db.write_points(data_points)
-
-    # def read_last(self):

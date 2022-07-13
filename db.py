@@ -16,4 +16,5 @@ class DB:
         self.db.switch_database(cfg.DB_NAME)
 
     def write_data_points(self, data_points):
+        print(data_points)
         self.db.write_points(data_points)

@@ -41,7 +41,7 @@ def start_recording():
         }]
         db.write_data_points(data_points)
 
-        print(data_points)
+        # print(data_points)
 
         time.sleep(cfg.RECORD_INTERVAL)
 

@@ -41,28 +41,7 @@ def start_recording():
         }]
         db.write_data_points(data_points)
 
-        # print(data_points)
-
         time.sleep(cfg.RECORD_INTERVAL)
-
-
-# def db_connect():
-#     db = None
-#     try:
-#         db = sqlite3.connect(cfg.DB_FILE)
-#     except Error as e:
-#         print(e)
-#     return db
-
-
-# def db_write_temp(db, data):
-#     sql = f'''
-#         INSERT INTO {cfg.DB_TBNAME}(timestamp,sensor1,sensor2)
-#         VALUES(?,?,?) '''
-#     cur = db.cursor()
-#     cur.execute(sql, data)
-#     db.commit()
-#     return cur.lastrowid
 
 
 # def record_sensors():
@@ -97,8 +76,8 @@ if __name__ == '__main__':
         '-l', '--loop', help='print temp loop (1s interval)', action='store_true')
     parser.add_argument(
         '-r', '--record', help='record data to database', action='store_true')
-    parser.add_argument(
-        '-s', '--show', nargs='?', const=1, type=int, help='show records for the last x data points')
+    # parser.add_argument(
+    #     '-s', '--show', nargs='?', const=1, type=int, help='show records for the last x data points')
 
     args = parser.parse_args()
 
@@ -115,10 +94,10 @@ if __name__ == '__main__':
     elif args.record:
         start_recording()
 
-    elif args.show:
-        temp_data = read_last_x(args.show)
-        for data_point in temp_data:
-            print(data_point)
+    # elif args.show:
+    #     temp_data = read_last_x(args.show)
+    #     for data_point in temp_data:
+    #         print(data_point)
 
     else:
         for sensor in sensors:

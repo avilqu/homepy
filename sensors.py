@@ -12,7 +12,7 @@ import sqlite3
 from sqlite3 import Error
 
 import config as cfg
-from DB import *
+from db import *
 from DS18B20 import *
 
 sensors_dirs = glob.glob(cfg.BASE_DIR + '28*')
